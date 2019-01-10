@@ -1,6 +1,7 @@
 package jBlock;
 
 import java.util.Date;
+import com.google.gson.GsonBuilder;
 
 public class Block {
 	
@@ -10,7 +11,7 @@ public class Block {
 	private long timeStamp;
 	private int nonce;
 
-	public Block(String data,String previousHash ) {
+	public Block(String data, String previousHash ) {
 		this.data = data;
 		this.previousHash = previousHash;
 		this.timeStamp = new Date().getTime();
@@ -22,13 +23,13 @@ public class Block {
 		return calculatedhash;
 	}
 	
-	public void mineBlock(int difficulty) {
+	public ResponseObject mineBlock(int difficulty) {
 		String target = StringUtil.getDificultyString(difficulty); 
-		while(!hash.substring( 1, difficulty).equals(target)) {
+		while(!hash.substring( 0, difficulty).equals(target)) {
 			nonce ++;
 			hash = calculateHash();
 		}
-		System.out.println("Block Mined!!! : " + hash);
+		return (new ResponseObject( hash , true ));
 	}
 	
 }
