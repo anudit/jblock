@@ -1,4 +1,4 @@
-package jBlock;
+package jBlock.Objects;
 
 import com.google.gson.GsonBuilder;
 
@@ -18,5 +18,3 @@ public class ResponseObject {
 	}
 
 }
-
-// ResponseObject res = new ResponseObject(  ,  );

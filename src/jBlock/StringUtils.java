@@ -3,7 +3,7 @@ import java.security.MessageDigest;
 
 import com.google.gson.GsonBuilder;
 
-public class StringUtil {
+public class StringUtils {
 	
 	public static String sha256(String input){
 		
@@ -29,7 +29,7 @@ public class StringUtil {
 		return new GsonBuilder().setPrettyPrinting().create().toJson(o);
 	}
 	
-	public static String getDificultyString(int difficulty) {
+	public static String getDifficultyString(int difficulty) {
 		return new String(new char[difficulty]).replace('\0', '0');
 	}
 	

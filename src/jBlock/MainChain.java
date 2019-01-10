@@ -2,9 +2,16 @@ package jBlock;
 import java.util.ArrayList;
 import com.google.gson.GsonBuilder;
 
+import jBlock.Objects.Token;
+import jBlock.Objects.Transaction;
+import jBlock.Objects.ResponseObject;
+
 public class MainChain {
 	
 	public static ArrayList<Block> blockchain = new ArrayList<Block>();
+	public static ArrayList<Token> Tokens = new ArrayList<Token>();
+	public static ArrayList<Transaction> Transactions = new ArrayList<Transaction>();
+
 	public static int difficulty = 1;
 
 	public static void main(String[] args) {	
@@ -14,7 +21,7 @@ public class MainChain {
 
 		System.out.println(validateChain().getJson());
 		
-		String blockchainJson = StringUtil.getJson(blockchain);
+		String blockchainJson = StringUtils.getJson(blockchain);
 		System.out.println(blockchainJson);
 		
 	}
@@ -48,10 +55,9 @@ public class MainChain {
 	}
 	
 	public static void mineBlock(String data) {
-
 		System.out.println("\nMining Block #" + Integer.toString(blockchain.size()+1));
 		Block newBlock = new Block( data, ((blockchain.size() == 0) ? "0" : blockchain.get(blockchain.size()-1).hash ) );
-		System.out.println(StringUtil.getJson(newBlock.mineBlock(difficulty)));
+		System.out.println(StringUtils.getJson(newBlock.mineBlock(difficulty)));
 		blockchain.add(newBlock);
 	}
 

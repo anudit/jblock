@@ -3,6 +3,8 @@ package jBlock;
 import java.util.Date;
 import com.google.gson.GsonBuilder;
 
+import jBlock.Objects.ResponseObject;
+
 public class Block {
 	
 	public String hash;
@@ -19,12 +21,12 @@ public class Block {
 	}
 	
 	public String calculateHash() {
-		String calculatedhash = StringUtil.sha256( previousHash + Long.toString(timeStamp) + Integer.toString(nonce) + data );
+		String calculatedhash = StringUtils.sha256( previousHash + Long.toString(timeStamp) + Integer.toString(nonce) + data );
 		return calculatedhash;
 	}
 	
 	public ResponseObject mineBlock(int difficulty) {
-		String target = StringUtil.getDificultyString(difficulty); 
+		String target = StringUtils.getDifficultyString(difficulty); 
 		while(!hash.substring( 0, difficulty).equals(target)) {
 			nonce ++;
 			hash = calculateHash();
