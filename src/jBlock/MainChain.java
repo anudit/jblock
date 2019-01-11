@@ -15,21 +15,18 @@ public class MainChain {
 	public static int difficulty = 1;
 
 	public static void main(String[] args) {	
-
-		mineBlock("Data#1");
-		mineBlock("Data#2");
-
-		System.out.println(validateChain().getJson());
 		
+		addToken("Ethereum", "ETH");
+
+		addTransaction("0x0", "0x1", 12, returnToken("ETH"));
+		addTransaction("0x1", "0x0", 8, returnToken("ETH"));
+		mineBlock();
+
 		String blockchainJson = StringUtils.getJson(blockchain);
 		System.out.println(blockchainJson);
 
-		addToken("Ethereum", "ETH");
-		addTransaction("0x0", "0x1", 12, returnToken("ETH"));
+		System.out.println(blockchain.get(blockchain.size() - 1).returnData());
 
-		String transactionsJson = StringUtils.getJson(Transactions);
-		System.out.println(transactionsJson);
-		
 	}
 	
 	public static ResponseObject validateChain() {
@@ -60,9 +57,11 @@ public class MainChain {
 		return (new ResponseObject("The Chain is Valid", true));
 	}
 	
-	public static void mineBlock(String data) {
+	public static void mineBlock() {
+		String transactionsJson = StringUtils.getJson(Transactions);
+		Transactions.clear();
 		System.out.println("\nMining Block #" + Integer.toString(blockchain.size()+1));
-		Block newBlock = new Block( data, ((blockchain.size() == 0) ? "0" : blockchain.get(blockchain.size()-1).hash ) );
+		Block newBlock = new Block( transactionsJson , ((blockchain.size() == 0) ? "0" : blockchain.get(blockchain.size()-1).hash ) );
 		System.out.println(StringUtils.getJson(newBlock.mineBlock(difficulty)));
 		blockchain.add(newBlock);
 	}

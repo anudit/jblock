@@ -24,6 +24,10 @@ public class Block {
 		String calculatedhash = StringUtils.sha256( previousHash + Long.toString(timeStamp) + Integer.toString(nonce) + data );
 		return calculatedhash;
 	}
+
+	public String returnData() {
+		return data;
+	}
 	
 	public ResponseObject mineBlock(int difficulty) {
 		String target = StringUtils.getDifficultyString(difficulty); 
