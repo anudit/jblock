@@ -23,6 +23,12 @@ public class MainChain {
 		
 		String blockchainJson = StringUtils.getJson(blockchain);
 		System.out.println(blockchainJson);
+
+		addToken("Ethereum", "ETH");
+		addTransaction("0x0", "0x1", 12, returnToken("ETH"));
+
+		String transactionsJson = StringUtils.getJson(Transactions);
+		System.out.println(transactionsJson);
 		
 	}
 	
@@ -78,6 +84,24 @@ public class MainChain {
 		return blockchain.size();
 	}
 
-	
+	public static void addTransaction(String to, String from, int amount, Token token){
+		Transaction trans = new Transaction(to, from, amount, token);
+		Transactions.add(trans);
+	}
+
+	public static void addToken(String name, String symbol){
+		Token tok = new Token(name, symbol);
+		Tokens.add(tok);
+	}
+
+	public static Token returnToken(String symbol){
+		for (int i=0; i <= Tokens.size(); i++){
+			Token t1 = Tokens.get(i);
+			if(t1.symbol == symbol){
+				return t1;
+			}
+		}
+		return (new Token("null", "null"));
+	}
 
 }
