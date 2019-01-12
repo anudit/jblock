@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import jBlock.Objects.Token;
 import jBlock.Objects.Transaction;
 import jBlock.Objects.ResponseObject;
+import jBlock.Server;
 
 public class MainChain {
 	
@@ -26,7 +27,7 @@ public class MainChain {
 		System.out.println(blockchainJson);
 
 		System.out.println(blockchain.get(blockchain.size() - 1).returnData());
-
+		Server.startServer();
 	}
 	
 	public static ResponseObject validateChain() {
